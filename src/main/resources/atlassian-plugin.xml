@@ -1,0 +1,64 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="my-plugin"/>
+    
+    <!-- add our web resources -->
+    <web-resource key="my-plugin-resources" name="my-plugin Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        
+        <resource type="download" name="my-plugin.css" location="/css/my-plugin.css"/>
+        <resource type="download" name="my-plugin.js" location="/js/my-plugin.js"/>
+        <resource type="download" name="images/" location="/images"/>
+
+        <context>my-plugin</context>
+    </web-resource>
+    
+    <!-- ====== Custom Field Example - START ========= -->
+    
+    <customfield-type key="admintextfield" name="Admin Editable Text Field" class="com.example.customfields.JiraCustomField">
+		<description>A text field only editable by those with admin permissions</description>
+		<resource type="velocity" name="view" location="templates/plugins/fields/view/view-basictext.vm"/>
+		<resource type="velocity" name="edit" location="templates/custom-field/edit-jiraadminonlytext.vm"/>
+		<resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
+	</customfield-type>
+    
+    <!-- NOTE: This is old way to import from the product container -->
+    <!-- <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties" /> -->
+    
+    <!-- ====== Custom Field Example - END ========= -->
+    
+    <!-- ====== Custom Field Example - START ========= -->
+    
+    <customfield-type name="Money Custom Field" i18n-name-key="money-custom-field.name" key="money-custom-field" class="com.example.customfields.MoneyCustomField">
+	    <description key="money-custom-field.description">The Money Custom Field Plugin</description>
+	    <resource name="view" type="velocity" location="templates/custom-field/money-custom-field/view.vm"/>
+	    <resource name="edit" type="velocity" location="templates/custom-field/money-custom-field/edit.vm"/>
+	  </customfield-type>
+	  
+  	<!-- ====== Custom Field Example - END ========= -->
+  	
+  	<!-- ====== Custom Field Example - START ========= -->
+  	
+  	<web-panel name="DueDateIndicator" i18n-name-key="due-date-indicator.name" key="due-date-indicator" location="atl.jira.view.issue.right.context" weight="1000">
+		<description key="due-date-indicator.description">The DueDateIndicator Plugin</description>
+	    <context-provider class="com.example.issues.DueDateIndicator"/>
+	    <resource name="view" type="velocity" location="templates/issues/due-date-indicator/due-date-indicator.vm"/>
+	    <label key="due-date-indicator.title"/>
+	</web-panel>
+	  
+	<!-- ====== Custom Field Example - END ========= -->
+  	
+  	
+  	
+  	
+  	
+    
+</atlassian-plugin>
